@@ -8,6 +8,8 @@
     "url": "git://github.com/dominictarr/ssb-mentions.git"
   },
   "dependencies": {
+    "ssb-marked": "^0.5.4",
+    "ssb-ref": "^2.3.0"
   },
   "devDependencies": {
   },
