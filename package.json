@@ -1,7 +1,7 @@
 {
   "name": "ssb-mentions",
   "description": "",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "https://github.com/dominictarr/ssb-mentions",
   "repository": {
     "type": "git",
@@ -11,11 +11,10 @@
     "ssb-marked": "^0.5.4",
     "ssb-ref": "^2.3.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "scripts": {
     "test": "set -e; for t in test/*.js; do node $t; done"
   },
   "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://dominictarr.com)",
-  "license": "MIT"  
+  "license": "MIT"
 }
