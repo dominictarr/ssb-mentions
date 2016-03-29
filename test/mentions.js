@@ -29,3 +29,18 @@ test('mentions in links are detected', function (t) {
   t.deepEquals(mentions(text.all), linkMention.all, 'all links')
   t.end()
 })
+
+var refMention = {
+  feed: [ { link: id.feed, name: undefined, rel: 'mentions' } ],
+  msg: [ { link: id.msg, name: undefined, rel: 'mentions' } ],
+  blob: [ { link: id.blob, name: undefined, rel: 'mentions' } ]
+}
+refMention.all = refMention.feed.concat(refMention.msg, refMention.blob)
+
+test('ref mentions are detected', function (t) {
+  t.deepEquals(mentions(id.feed), refMention.feed, 'feed link')
+  t.deepEquals(mentions(id.blob), refMention.blob, 'blob link')
+  t.deepEquals(mentions(id.msg), refMention.msg, 'msg link')
+  t.deepEquals(mentions(id.all), refMention.all, 'all link')
+  t.end()
+})
