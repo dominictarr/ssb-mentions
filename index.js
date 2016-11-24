@@ -32,11 +32,11 @@ module.exports = function (text) {
   var a = []
   links(text, function (link) {
     if(ref.isFeed(link.target))
-      a.push({link: link.target, rel: 'mentions', name: link.label && link.label.replace(/^@/, '')})
+      a.push({link: link.target, name: link.label && link.label.replace(/^@/, '')})
     else if(ref.isBlob(link.target))
-      a.push({link: link.target, rel: 'mentions', name: link.label})
+      a.push({link: link.target, name: link.label})
     else if(ref.isMsg(link.target))
-      a.push({link: link.target, rel: 'mentions', name: link.label})
+      a.push({link: link.target, name: link.label})
   })
   return a
 }
