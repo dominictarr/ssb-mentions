@@ -16,9 +16,9 @@ var text = {
 text.all = [text.feed, text.msg, text.blob].join(' ')
 
 var linkMention = {
-  feed: [ { link: id.feed, name: 'feed', rel: 'mentions' } ],
-  msg: [ { link: id.msg, name: 'a msg', rel: 'mentions' } ],
-  blob: [ { link: id.blob, name: 'a blob', rel: 'mentions' } ]
+  feed: [ { link: id.feed, name: 'feed' } ],
+  msg: [ { link: id.msg, name: 'a msg' } ],
+  blob: [ { link: id.blob, name: 'a blob' } ]
 }
 linkMention.all = linkMention.feed.concat(linkMention.msg, linkMention.blob)
 
@@ -31,9 +31,9 @@ test('mentions in links are detected', function (t) {
 })
 
 var refMention = {
-  feed: [ { link: id.feed, name: undefined, rel: 'mentions' } ],
-  msg: [ { link: id.msg, name: undefined, rel: 'mentions' } ],
-  blob: [ { link: id.blob, name: undefined, rel: 'mentions' } ]
+  feed: [ { link: id.feed, name: undefined } ],
+  msg: [ { link: id.msg, name: undefined } ],
+  blob: [ { link: id.blob, name: undefined } ]
 }
 refMention.all = refMention.feed.concat(refMention.msg, refMention.blob)
 
