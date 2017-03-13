@@ -28,7 +28,8 @@ function links (s, _onLink) {
   onLink = noop
 }
 
-module.exports = function (text) {
+module.exports = function (text, opts) {
+  var bareFeedNames = opts && opts.bareFeedNames
   var a = []
   links(text, function (link) {
     if(ref.isFeed(link.target))
@@ -37,6 +38,8 @@ module.exports = function (text) {
       a.push({link: link.target, name: link.label})
     else if(ref.isMsg(link.target))
       a.push({link: link.target, name: link.label})
+    else if(bareFeedNames && link.target && link.target[0] === '@')
+      a.push({link: link.target[0], name: link.target.substr(1)})
   })
   return a
 }
