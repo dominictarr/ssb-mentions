@@ -56,3 +56,9 @@ test('ref mentions are detected', function (t) {
 
   t.end()
 })
+
+test('bare feed name mentions can be detected', function (t) {
+  t.deepEquals(mentions('a @feed mention', {bareFeedNames: true}),
+    [{name: 'feed', link: '@'}], 'feed link')
+  t.end()
+})
