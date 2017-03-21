@@ -62,3 +62,9 @@ test('bare feed name mentions can be detected', function (t) {
     [{name: 'feed', link: '@'}], 'feed link')
   t.end()
 })
+
+test('detect hashtags', function (t) {
+  t.deepEquals(mentions('a nice #hashtag here'),
+    [{link: '#hashtag'}], 'hashtag link')
+  t.end()
+})

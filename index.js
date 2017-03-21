@@ -8,6 +8,10 @@ extractor.mention = function (_, id) {
   onLink({target: id})
 }
 
+extractor.hashtag = function (_, hashtag) {
+  onLink({target: hashtag})
+}
+
 extractor.link = function (href, _, text) {
   onLink({label: text, target: href, embed: false})
 }
@@ -40,6 +44,8 @@ module.exports = function (text, opts) {
       a.push({link: link.target, name: link.label})
     else if(bareFeedNames && link.target && link.target[0] === '@')
       a.push({link: link.target[0], name: link.target.substr(1)})
+    else if(link.target && link.target[0] === '#')
+      a.push({link: link.target})
   })
   return a
 }
