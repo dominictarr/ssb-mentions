@@ -68,3 +68,14 @@ test('detect hashtags', function (t) {
     [{link: '#hashtag'}], 'hashtag link')
   t.end()
 })
+
+test('no html tags in link names', function (t) {
+  t.deepEquals(mentions('link: [`code` *em* **strong** ~~del~~]' +
+    '(&9SSTQys34p9f4zqjxvRwENjFX0JapgtesRey7+fxK14=.sha256)'), [
+    {
+      link: '&9SSTQys34p9f4zqjxvRwENjFX0JapgtesRey7+fxK14=.sha256',
+      name: 'code em strong del'
+    }
+  ], 'no tags')
+  t.end()
+})
