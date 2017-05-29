@@ -31,6 +31,10 @@ extractor.mention = function (_, id) {
   onLink({target: id})
 }
 
+extractor.emoji = function (name) {
+  onLink({label: name, emoji: true})
+}
+
 extractor.hashtag = function (_, hashtag) {
   onLink({target: hashtag})
 }
@@ -47,7 +51,7 @@ function links (s, _onLink) {
   if('string' !== typeof s) return
   onLink = _onLink
   try {
-    marked(s, {renderer: extractor})
+    marked(s, {renderer: extractor, emoji: extractor.emoji})
   } catch(err) {
     console.log(JSON.stringify(s))
     throw err
@@ -57,6 +61,7 @@ function links (s, _onLink) {
 
 module.exports = function (text, opts) {
   var bareFeedNames = opts && opts.bareFeedNames
+  var emoji = opts && opts.emoji
   var a = []
   links(text, function (link) {
     if(ref.isFeed(link.target))
@@ -69,6 +74,8 @@ module.exports = function (text, opts) {
       a.push({link: link.target[0], name: link.target.substr(1)})
     else if(link.target && link.target[0] === '#')
       a.push({link: link.target})
+    else if(emoji && link.emoji)
+      a.push({emoji: true, name: link.label})
   })
   return a
 }

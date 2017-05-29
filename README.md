@@ -18,6 +18,8 @@ var ary = mentions(markdown, opts)
   `{name: "NAME", link: "@"}`. these can then have the `link` filled in with a
   feed id, to make a "patchwork-style mention", or be removed from the mentions
   array before publishing.
+- `emoji` (boolean, default false): if true, include emoji in the mentions
+  array, in the form `{name: "NAME", emoji: true}`.
 
 ## License
 

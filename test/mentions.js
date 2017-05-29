@@ -79,3 +79,11 @@ test('no html tags in link names', function (t) {
   ], 'no tags')
   t.end()
 })
+
+test('detect emoji', function (t) {
+  t.deepEquals(mentions('some nice :+1: :emoji: here', {emoji: true}), [
+    {name: '+1', emoji: true},
+    {name: 'emoji', emoji: true},
+  ], 'emoji')
+  t.end()
+})
