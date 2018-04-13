@@ -26,6 +26,15 @@ test('mentions in links are detected', function (t) {
       }
     ], 'blob link')
 
+  t.deepEquals(mentions(
+    '[a blob](&9SSTQys34p9f4zqjxvRwENjFX0JapgtesRey7+fxK14=.sha256?unbox=A2LvseOYKDXyuSGlXl3Sz0F5j2khVCN6JTf8ORD/tM8=.boxs)'), [
+      {
+        link: '&9SSTQys34p9f4zqjxvRwENjFX0JapgtesRey7+fxK14=.sha256',
+        key: 'A2LvseOYKDXyuSGlXl3Sz0F5j2khVCN6JTf8ORD/tM8=',
+        name: 'a blob',
+      }
+    ], 'secret blob link')
+
   t.end()
 })
 
