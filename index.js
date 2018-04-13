@@ -66,7 +66,7 @@ module.exports = function (text, opts) {
   links(text, function (link) {
     if(ref.isFeed(link.target))
       a.push({link: link.target, name: link.label && link.label.replace(/^@/, '')})
-    else if(ref.isBlob(link.target))
+    else if(link.target.startsWith('&'))
       a.push({link: link.target, name: link.label})
     else if(ref.isMsg(link.target))
       a.push({link: link.target, name: link.label})
