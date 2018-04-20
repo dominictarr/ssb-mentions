@@ -67,9 +67,8 @@ module.exports = function (text, opts) {
     if(ref.isFeed(link.target))
       a.push({link: link.target, name: link.label && link.label.replace(/^@/, '')})
     else if(ref.isBlob(link.target)) {
-      var blob = ref.parseBlob(link.target)
-      var result = {link: blob.id, name: link.label}
-      if (blob.key) result.key = blob.key
+      var result = ref.parseBlob(link.target)
+      result.name = link.label
       a.push(result)
     }
     else if(ref.isMsg(link.target))
