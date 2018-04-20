@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "ssb-marked": "^0.7.0",
-    "ssb-ref": "github:ssbc/ssb-ref#secret-blobs"
+    "ssb-ref": "github:ssbc/ssb-ref#query-on-all-refs"
   },
   "devDependencies": {
     "tape": "^4.5.1"
