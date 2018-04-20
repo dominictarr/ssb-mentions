@@ -64,18 +64,17 @@ module.exports = function (text, opts) {
   var emoji = opts && opts.emoji
   var a = []
   links(text, function (link) {
-    if(ref.isFeed(link.target))
-      a.push({link: link.target, name: link.label && link.label.replace(/^@/, '')})
-    else if(ref.isBlob(link.target))
-      a.push({link: link.target, name: link.label})
-    else if(ref.isMsg(link.target))
-      a.push({link: link.target, name: link.label})
-    else if(bareFeedNames && link.target && link.target[0] === '@')
+    var result = link.target && ref.parseLink(link.target)
+    if (result) {
+      result.name = link.label && link.label.replace(/^@/, '')
+      a.push(result)
+    } else if(bareFeedNames && link.target && link.target.startsWith('@')) {
       a.push({link: link.target[0], name: link.target.substr(1)})
-    else if(link.target && link.target[0] === '#')
+    } else if(link.target && link.target.startsWith('#')) {
       a.push({link: link.target})
-    else if(emoji && link.emoji)
+    } else if(emoji && link.emoji) {
       a.push({emoji: true, name: link.label})
+    }
   })
   return a
 }

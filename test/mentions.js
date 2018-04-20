@@ -18,6 +18,17 @@ test('mentions in links are detected', function (t) {
       }
     ], 'msg link')
 
+    t.deepEquals(mentions(
+      '[a secret msg](%A2LvseOYKDXyuSGlXl3Sz0F5j2khVCN6JTf8ORD/tM8=.sha256?unbox=9SSTQys34p9f4zqjxvRwENjFX0JapgtesRey7=.boxs)'), [
+        {
+          link: '%A2LvseOYKDXyuSGlXl3Sz0F5j2khVCN6JTf8ORD/tM8=.sha256',
+          name: 'a secret msg',
+          query: {
+            unbox: '9SSTQys34p9f4zqjxvRwENjFX0JapgtesRey7=.boxs'
+          }
+        }
+      ], 'msg link with unbox')
+
   t.deepEquals(mentions(
     '[a blob](&9SSTQys34p9f4zqjxvRwENjFX0JapgtesRey7+fxK14=.sha256)'), [
       {
@@ -25,6 +36,17 @@ test('mentions in links are detected', function (t) {
         name: 'a blob',
       }
     ], 'blob link')
+
+  t.deepEquals(mentions(
+    '[a blob](&9SSTQys34p9f4zqjxvRwENjFX0JapgtesRey7+fxK14=.sha256?unbox=A2LvseOYKDXyuSGlXl3Sz0F5j2khVCN6JTf8ORD/tM8=.boxs)'), [
+      {
+        link: '&9SSTQys34p9f4zqjxvRwENjFX0JapgtesRey7+fxK14=.sha256',
+        name: 'a blob',
+        query: {
+          unbox: 'A2LvseOYKDXyuSGlXl3Sz0F5j2khVCN6JTf8ORD/tM8=.boxs'
+        }
+      }
+    ], 'secret blob link')
 
   t.end()
 })
