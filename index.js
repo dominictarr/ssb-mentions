@@ -3,6 +3,7 @@ var marked = require('ssb-marked')
 function noop(){}
 var onLink = noop
 var extractor = new marked.Renderer()
+var deepEquals = require('deep-equals')
 
 // prevent html from entering into mention labels.
 // code taken from ssb-markdown
@@ -65,17 +66,26 @@ module.exports = function (text, opts) {
   var a = []
   links(text, function (link) {
     var result = link.target && ref.parseLink(link.target)
+    var mention = null
     if (result) {
       result.name = link.label && link.label.replace(/^@/, '')
-      a.push(result)
+      mention = result
     } else if(bareFeedNames && link.target && link.target.startsWith('@')) {
-      a.push({link: link.target[0], name: link.target.substr(1)})
+      mention = {link: link.target[0], name: link.target.substr(1)}
     } else if(link.target && link.target.startsWith('#')) {
-      a.push({link: link.target})
+      mention = {link: link.target}
     } else if(emoji && link.emoji) {
-      a.push({emoji: true, name: link.label})
+      mention = {emoji: true, name: link.label}
     }
+
+    for(var i = 0; i < a.length; i++)
+      if(deepEquals(a[i], mention)) return
+    a.push(mention)
   })
   return a
 }
+
+
+
+
 
