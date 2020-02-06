@@ -1,9 +1,10 @@
-var ref = require('ssb-ref')
-var marked = require('ssb-marked')
+const ref = require('ssb-ref')
+const marked = require('ssb-marked')
+const isEqual = require('lodash.isequal')
+
 function noop(){}
 var onLink = noop
 var extractor = new marked.Renderer()
-var deepEquals = require('deep-equals')
 
 // prevent html from entering into mention labels.
 // code taken from ssb-markdown
@@ -79,13 +80,8 @@ module.exports = function (text, opts) {
     }
 
     for(var i = 0; i < a.length; i++)
-      if(deepEquals(a[i], mention)) return
+      if(isEqual(a[i], mention)) return
     a.push(mention)
   })
   return a
 }
-
-
-
-
-
