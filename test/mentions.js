@@ -121,3 +121,7 @@ test('detect emoji', function (t) {
   t.end()
 })
 
+test('links don\'t return null mentions', function (t) {
+  t.deepEquals(mentions('look at http://example.com friends'), [] , 'empty array')
+  t.end()
+})

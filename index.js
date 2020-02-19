@@ -81,7 +81,10 @@ module.exports = function (text, opts) {
 
     for(var i = 0; i < a.length; i++)
       if(isEqual(a[i], mention)) return
-    a.push(mention)
+
+    if (mention != null) {
+      a.push(mention)
+    }
   })
   return a
 }
